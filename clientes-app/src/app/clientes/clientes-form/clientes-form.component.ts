@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Cliente } from "../cliente";
 import { ClientesService } from "../../clientes.service";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-clientes-form',
@@ -14,12 +14,28 @@ export class ClientesFormComponent implements OnInit {
   cliente: Cliente;
   success: boolean = false;
   errors: String[] = [];
+  id: number = 0;
 
-  constructor( private service : ClientesService, private router: Router ) {
+  constructor( 
+      private service : ClientesService, 
+      private router: Router,
+      private activatedRoute: ActivatedRoute
+    ) {
     this.cliente = new Cliente();
    }
 
   ngOnInit(): void {
+    let params: Params = this.activatedRoute.params;
+    if(params && params.value && params.value.id){
+      this.id = params.value.id;
+      this.service
+        .getClienteById(this.id)
+        .subscribe(
+          response => this.cliente = response,
+          errorResponse => this.cliente = new Cliente()
+        )
+    }
+    
   }
 
   voltarParaListagem(): void {
