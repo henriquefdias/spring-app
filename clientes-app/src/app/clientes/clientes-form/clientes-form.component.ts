@@ -43,6 +43,16 @@ export class ClientesFormComponent implements OnInit {
   }
 
   onSubmit(){
+    if(this.id != 0){
+      this.service
+        .atualizar(this.cliente)
+        .subscribe(response => {
+          this.success = true;
+          this.errors = [];
+        }, errorResponse => {
+          this.errors = ['Erro ao atualizar o cliente.']
+        })
+    } else {
     this.service
       .salvar(this.cliente)
       .subscribe(response => {
@@ -54,6 +64,7 @@ export class ClientesFormComponent implements OnInit {
         this.errors = errorResponse.error.errors;
       }
       )
+    }
   }
 
 }
