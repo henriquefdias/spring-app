@@ -29,7 +29,7 @@ export class ClientesFormComponent implements OnInit {
     let params: Observable<Params> = this.activatedRoute.params
     params.subscribe(urlParams => {
       this.id = urlParams['id']
-      if(this.id){
+      if(this.id != 0 && this.id){
       this.service
         .getClienteById(this.id)
         .subscribe(
@@ -45,7 +45,7 @@ export class ClientesFormComponent implements OnInit {
   }
 
   onSubmit(){
-    if(this.id != 0){
+    if(this.id != 0 && this.id){
       this.service
         .atualizar(this.cliente)
         .subscribe(response => {

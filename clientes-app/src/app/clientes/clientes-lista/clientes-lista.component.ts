@@ -11,6 +11,7 @@ import { Router } from "@angular/router";
 export class ClientesListaComponent implements OnInit {
 
   clientes : Cliente[] = [];
+  clienteSelecionado: Cliente = new Cliente();
 
   constructor(private service: ClientesService, private router: Router) { }
 
@@ -22,5 +23,9 @@ export class ClientesListaComponent implements OnInit {
 
   novoCadastro(): void {
     this.router.navigate(['/clientes-form'])
+  }
+
+  preparaDelecao(cliente: Cliente): void{
+    this.clienteSelecionado = cliente;
   }
 }
