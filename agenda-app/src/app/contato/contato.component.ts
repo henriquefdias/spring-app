@@ -18,7 +18,7 @@ export class ContatoComponent implements OnInit {
   ) {
     this.formulario = this.fb.group({
       nome: ['', Validators.required],
-      email: ['', Validators.email]
+      email: ['', [Validators.required, Validators.email]]
     })
    }
 
@@ -30,8 +30,6 @@ export class ContatoComponent implements OnInit {
   }
 
   submit(){
-    console.log(this.formulario.value);
-    
     /*
     this.service.save(c).subscribe(resposta => {
       console.log(resposta)
