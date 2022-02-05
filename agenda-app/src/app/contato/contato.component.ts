@@ -13,6 +13,7 @@ export class ContatoComponent implements OnInit {
 
   formulario: FormGroup;
   contatos: Contato[] = [];
+  colunas: String[] = ['id', 'nome', 'email', 'favorito'];
 
   constructor(
     private service: ContatoService,
