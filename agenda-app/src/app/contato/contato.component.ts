@@ -26,7 +26,13 @@ export class ContatoComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    
+    this.listarContatos();
+  }
+  
+  listarContatos(): void {
+    this.service.list().subscribe(response => {
+      this.contatos = response;
+    })
   }
 
   submit(){
